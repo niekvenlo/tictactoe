@@ -25,25 +25,29 @@
     this.board   = Array(9);
     this.player  = 0;
     this._tokens = { 0: "x", 1: "o" };
+    $('table').on('click', this.clickhandler);
   }
-  Game.prototype.token = function () {
-    return this._tokens[this.player];
-  }
-  Game.prototype.clickhandler = function (e) {
-    var id = e.target.id;
-    if (game.board[id] === undefined) {
-      game.board[id] = game.player;
-      game.update_board(e);
-      game.player = (game.player+1) % 2;
+  Game.prototype = {
+    constructor: Game,
+    token: function () {
+      return this._tokens[this.player];
+    },
+    clickhandler: function (e) {
+      var id = e.target.id;
+      if (game.board[id] === undefined) {
+        game.board[id] = game.player;
+        game.update_board(e);
+        game.player = (game.player+1) % 2;
+      }
+    },
+    update_board: function (e) {
+      token = game.token();
+      $(e.target).addClass("x").append("<p>"+token+"</p>");
     }
-  }
-  Game.prototype.update_board = function (e) {
-    token = game.token();
-    $(e.target).addClass("x").append("<p>"+token+"</p>");
   }
 
   var game = new Game;
-  $('table').on('click', game.clickhandler)
+
 
 
 
