@@ -8,7 +8,7 @@
   }
 
   function puts(obj) {
-    console.log(obj.toString());
+    console.log(obj);
   }
 
   function p(obj, convert=true) {
@@ -21,15 +21,48 @@
   }
 
   //Tic tac toe
-  var counter = 0;
-  function boo(e) {
-    var token = (counter++ % 2 === 0) ? "x" : "o";
-    var cell = $(e.target)
-    cell.addClass(token);
-    cell.append("<p>"+token+"</p>")
+
+
+
+  var game = {
+    board: Array(9),
+    player: 0,
+    _tokens: { 0: "x", 1: "o" },
+    token: function() {
+      return this._tokens[this.player];
+    }
+  }
+  function clickhandler(e) {
+    var id = e.target.id;
+    if (game.board[id] === undefined) {
+      game.board[id] = game.player;
+      update_board(e);
+      game.player = (game.player+1) % 2;
+    }
   }
 
-  $('table').on('click', boo)
+  function update_board(e) {
+    token = game.token();
+    $(e.target).addClass("x").append("<p>"+token+"</p>");
+  }
+
+
+
+
+  $('table').on('click', clickhandler)
+
+
+
+  // function boo(e) {
+  //   var token = "x";
+  //   var cell = $(e.target)
+  //   cell.addClass(token);
+  //   cell.append("<p>"+token+"</p>")
+  // }
+  // $('table').on('click', boo)
+
+
+
 
 
 

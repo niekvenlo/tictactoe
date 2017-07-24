@@ -1,11 +1,10 @@
 body { background-color: #fff; }
 table {
-  background-color: #000;
+  background-color: #ddd;
   border-collapse: collapse;
 }
 td { width: 100px; height: 100px; }
-.x { background-color: #fff; }
-.o { background-color: #fff; }
+.x, .o { background-color: #fff; }
 p  {
   font-family: fantasy;
   text-align: center;
@@ -13,4 +12,19 @@ p  {
   font-size: 100px;
   overflow: hidden;
   margin: 0px 0px;
+}
+
+#test {
+  background-color: blue;
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+}
+
+#test span {
+  display: block;
+  font-size: 250px;
+  font-family: fantasy;
+  margin-left: -10px;
+  margin-top: -130px;
 }
