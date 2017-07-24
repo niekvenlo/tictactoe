@@ -1,0 +1,16 @@
+body { background-color: #fff; }
+table {
+  background-color: #000;
+  border-collapse: collapse;
+}
+td { width: 100px; height: 100px; }
+.x { background-color: #fff; }
+.o { background-color: #fff; }
+p  {
+  font-family: fantasy;
+  text-align: center;
+  max-height: 100px;
+  font-size: 100px;
+  overflow: hidden;
+  margin: 0px 0px;
+}
