@@ -26,22 +26,30 @@
       this.board = Array(9);
       this.player = 0;
       this._tokens = { 0: "x", 1: "o" };
-      $('table').on('click', this.clickhandler);
+      $("table").on("click", this.clickhandler);
+      $("table").append("<div id=next></div>");
+      setTimeout(this.next,100);
     }
-    token() {
+    get token() {
       return game._tokens[this.player];
     }
     clickhandler(e) {
       var id = e.target.id;
-      if (game.board[id] === undefined) {
+      if (game.board[id] === undefined && id.match(/\d/)) {
         game.board[id] = game.player;
         game.update_board(e);
         game.player = (game.player+1) % 2;
       }
     }
     update_board(e) {
-      var token = this.token();
+      var token = this.token;
       $(e.target).addClass(token).append("<p>"+token+"</p>");
+    }
+    next() {
+      var pos = $("table")[0].getBoundingClientRect();
+      $("#next").css("left", pos.right+"px");
+      $("#next").css("top", pos.top+"px");
+      puts(left);
     }
   }
 

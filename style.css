@@ -4,7 +4,7 @@ table {
   background-color: #fff;
 }
 
-td {
+td, #next {
   width: 100px;
   height: 100px;
   border: 1px solid #eee;
@@ -21,4 +21,12 @@ p  {
   font-size: 100px;
   overflow: hidden;
   margin: -40px 0px 0px;
+}
+
+#next {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  margin: 2px 0px;
+  padding: 1px;
 }
