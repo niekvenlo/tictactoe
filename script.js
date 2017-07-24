@@ -25,31 +25,36 @@
     constructor() {
       this.board = Array(9);
       this.player = 0;
-      this._tokens = { 0: "x", 1: "o" };
       $("table").on("click", this.clickhandler);
-      $("table").append("<div id=next></div>");
-      setTimeout(this.next,100);
+      this.target = null;
+      this.move();
     }
     get token() {
-      return game._tokens[this.player];
+      var tokens = { 0: "x", 1: "o" };
+      return tokens[this.player];
     }
     clickhandler(e) {
+      game.target = e.target;
       var id = e.target.id;
       if (game.board[id] === undefined && id.match(/\d/)) {
         game.board[id] = game.player;
-        game.update_board(e);
-        game.player = (game.player+1) % 2;
+        game.lastmove = id;
+        game.move(e);
       }
     }
-    update_board(e) {
+    move(e) {
       var token = this.token;
-      $(e.target).addClass(token).append("<p>"+token+"</p>");
+      if (e) {
+        var pos = e.target.getBoundingClientRect();
+        $("#next").animate({ left: pos.left, top: pos.top }, 500, game.update_board);
+      }
+      $("#next").removeClass().addClass(token).html("<p>"+token+"</p>");
     }
-    next() {
-      var pos = $("table")[0].getBoundingClientRect();
-      $("#next").css("left", pos.right+"px");
-      $("#next").css("top", pos.top+"px");
-      puts(left);
+    update_board(e) {
+      var token = game.token;
+      game.player = (game.player+1) % 2;
+      $("#next").animate({ left: 400, top: 0 }, 1);
+      $("#"+game.target.id).addClass(token).html("<p>"+token+"</p>");
     }
   }
 
