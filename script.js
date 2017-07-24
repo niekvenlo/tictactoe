@@ -21,45 +21,30 @@
   }
 
   //Tic tac toe
-
-
-
-  var game = {
-    board: Array(9),
-    player: 0,
-    _tokens: { 0: "x", 1: "o" },
-    token: function() {
-      return this._tokens[this.player];
-    }
+  function Game() {
+    this.board   = Array(9);
+    this.player  = 0;
+    this._tokens = { 0: "x", 1: "o" };
   }
-  function clickhandler(e) {
+  Game.prototype.token = function () {
+    return this._tokens[this.player];
+  }
+  Game.prototype.clickhandler = function (e) {
     var id = e.target.id;
     if (game.board[id] === undefined) {
       game.board[id] = game.player;
-      update_board(e);
+      game.update_board(e);
       game.player = (game.player+1) % 2;
     }
   }
-
-  function update_board(e) {
+  Game.prototype.update_board = function (e) {
     token = game.token();
     $(e.target).addClass("x").append("<p>"+token+"</p>");
   }
 
+  var game = new Game;
+  $('table').on('click', game.clickhandler)
 
-
-
-  $('table').on('click', clickhandler)
-
-
-
-  // function boo(e) {
-  //   var token = "x";
-  //   var cell = $(e.target)
-  //   cell.addClass(token);
-  //   cell.append("<p>"+token+"</p>")
-  // }
-  // $('table').on('click', boo)
 
 
 
