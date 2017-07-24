@@ -25,9 +25,9 @@
     constructor() {
       this.board = Array(9);
       this.player = 0;
-      $("table").on("click", this.clickhandler);
       this.target = null;
       this.move();
+      $("table").on("click", this.clickhandler);
     }
     get token() {
       var tokens = { 0: "x", 1: "o" };
@@ -38,23 +38,24 @@
       var id = e.target.id;
       if (game.board[id] === undefined && id.match(/\d/)) {
         game.board[id] = game.player;
-        game.lastmove = id;
         game.move(e);
       }
     }
     move(e) {
       var token = this.token;
+      $("#next").removeClass().addClass(token).html("<p>"+token+"</p>");
       if (e) {
         var pos = e.target.getBoundingClientRect();
-        $("#next").animate({ left: pos.left, top: pos.top }, 500, game.update_board);
+        $("#next").animate({ left: pos.left, top: pos.top }, 300, game.update_board);
       }
-      $("#next").removeClass().addClass(token).html("<p>"+token+"</p>");
     }
     update_board(e) {
       var token = game.token;
-      game.player = (game.player+1) % 2;
-      $("#next").animate({ left: 400, top: 0 }, 1);
       $("#"+game.target.id).addClass(token).html("<p>"+token+"</p>");
+      game.player = (game.player+1) % 2;
+      var token = game.token;
+      $("#next").removeClass().addClass(token).html("<p>"+token+"</p>");
+      $("#next").animate({ left: 400, top: 0 }, 0);
     }
   }
 
